@@ -23,7 +23,7 @@ class ResultViewController: UIViewController {
         
     }
     
-    func getAnimal() {
+    private func getAnimal() {
         let animalIntCount = answerChosen.reduce(into: [:]) {
             counts, letter in  counts[letter.animal, default: 0] += 1  }
         
