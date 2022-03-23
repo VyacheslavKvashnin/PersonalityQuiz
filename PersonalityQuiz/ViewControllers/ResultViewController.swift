@@ -10,7 +10,6 @@ import UIKit
 class ResultViewController: UIViewController {
     
     @IBOutlet weak var iconLabel: UILabel!
-    
     @IBOutlet weak var descriptionLabel: UILabel!
     
     var answerChosen: [Answer]!
@@ -20,9 +19,18 @@ class ResultViewController: UIViewController {
         
         navigationItem.hidesBackButton = true
         
+        getAnimal()
+        
     }
     
-    func getAnimal(in animals: [Answer]) {
-      
+    func getAnimal() {
+        let animalIntCount = answerChosen.reduce(into: [:]) {
+            counts, letter in  counts[letter.animal, default: 0] += 1  }
+        
+        let sortedAnimal = animalIntCount.sorted { $0.value > $1.value }
+        
+        guard let icon = sortedAnimal.first?.key else { return }
+        iconLabel.text = "Вы - \(String(icon.rawValue))"
+        descriptionLabel.text = icon.definition
     }
 }
